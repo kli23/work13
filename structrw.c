@@ -7,6 +7,7 @@
 #include <unistd.h>
 #include <errno.h>
 #include <string.h>
+#include <fcntl.h>
 
 struct pop_entry {
 	int year;
@@ -15,6 +16,11 @@ struct pop_entry {
 };
 
 void read_csv() {
+	int a = open("nyc_pop.csv", O_RDONLY, 0);
+	if (a == -1) {
+		printf("Error: %s\n", strerror(errno));
+		return;
+	}
 	
 
 
@@ -22,5 +28,17 @@ void read_csv() {
 }
 
 int main(int argc, char *argv[]) {
+
+	char command[100];
+
+	if (argc == 1) { // if no command line arg, ask for one
+        printf("Enter a command: ");
+        fgets(command, 100, stdin);
+    } 
+    else if (argc > 1){ // $make run ARGS=directory_name
+        strcpy(command, argv[1]);
+    }
+
+	if (command == "-read_csv") read_csv();
 
 }
