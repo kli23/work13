@@ -27,6 +27,14 @@ void read_csv() {
 
 }
 
+void add_data() {
+
+}
+
+void update_data() {
+
+}
+
 int main(int argc, char *argv[]) {
 
 	char command[100];
@@ -40,5 +48,11 @@ int main(int argc, char *argv[]) {
     }
 
 	if (command == "-read_csv") read_csv();
+
+	else if (command == "-add_csv") add_csv();
+
+	else if (command == "-update_csv") update_csv();
+
+	else printf("Invalid command\n");
 
 }
