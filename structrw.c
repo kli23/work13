@@ -15,19 +15,38 @@ struct pop_entry {
 	char boro[15];
 };
 
+int line_counter(char *text) {
+	int n = 1;
+	int i;
+	for (i = 0; i < strlen(text); i++)
+		if ( *(text + i) == '\n') n++;
+	if ( *(text + strlen(text) - 1) == '\n') n--;
+	return n;
+}
+
 void read_csv() {
+
 	int a = open("nyc_pop.csv", O_RDONLY, 0);
 	if (a == -1) {
 		printf("Error: %s\n", strerror(errno));
 		return;
 	}
-	char line[100];
-	int b = read(a, line, 55);
+
+
+	struct stat ss;
+	stat("nyc_pop.csv", &ss);
+	int file_size = (&ss) -> st_size; // get the size of entire file to know how many bytes that need to be read
+
+
+	char line[file_size];
+	int b = read(a, line, file_size);
 	if (b == -1) {
 		printf("Error: %s\n", strerror(errno));
 		return;
 	}
-	printf("%s", line);
+	printf("\n%s", line);
+	printf("\n%d", line_counter(line));
+
 
 }
 
