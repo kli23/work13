@@ -21,9 +21,17 @@ void read_csv() {
 		printf("Error: %s\n", strerror(errno));
 		return;
 	}
-	
+	char line[100];
+	int b = read(a, line, 55);
+	if (b == -1) {
+		printf("Error: %s\n", strerror(errno));
+		return;
+	}
+	printf("%s", line);
 
+}
 
+void read_data() {
 
 }
 
@@ -47,11 +55,14 @@ int main(int argc, char *argv[]) {
         strcpy(command, argv[1]);
     }
 
-	if (command == "-read_csv") read_csv();
+	
+	if (!strcmp(command, "-read_csv")) read_csv();
 
-	else if (command == "-add_csv") add_csv();
+	else if (!strcmp(command, "-read_data")) read_data();
 
-	else if (command == "-update_csv") update_csv();
+	else if (!strcmp(command, "-add_data")) add_data();
+
+	else if (!strcmp(command, "-update_data")) update_data();
 
 	else printf("Invalid command\n");
 
