@@ -7,3 +7,4 @@ run:
 clean:
 	rm structrw
 	rm *.o
+	rm nyc_pop.data
